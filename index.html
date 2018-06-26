@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Calculadora de Juros Compostos</title>
+    <style>
+        table{
+            text-align: center;
+            margin: 0 auto;
+        }
+        #container{
+            text-align: center;
+            margin: 0 auto;
+        }
+        #capital, #t, #juros{
+            margin: 0 auto;
+            text-align: center;
+            width: 300px;
+            border: 1px solid;
+            border-radius: 3px;
+        }
+        button{
+            text-align: center;
+            border: 1px solid;
+            border-radius: 3px;
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>
+                <input type="text" name="capital" id="capital" placeholder="Digite aqui o valor inicial">
+                <input type="text" name="t" id="t" placeholder="Digite aqui o tempo em meses">
+                <input type="text" name="juros" id="juros" placeholder="Digite aqui a porcentagem de juros ao mês">
+                <button onclick="calcularJuros()">Calcular</button>
+                <button onclick="recomecar()">Novo calculo</button>
+            </td>
+        </tr>
+        <tr>
+            <td id="container">
+                <div id="resultadoValoresMes"></div>
+                <div id="resultadoRendimento"></div>
+            </td>
+        </tr>
+    </table>
+    <script>
+        function recomecar() {
+            document.getElementById("resultadoRendimento").innerHTML = "";
+            document.getElementById("resultadoRendimento").innerHTML = "";
+            document.getElementById("resultadoValoresMes").innerHTML = "";
+            document.getElementById("capital").value = "";
+            document.getElementById("t").value = "";
+            document.getElementById("juros").value = "";
+        }
+        function calcularJuros() {
+            var c = document.getElementById("capital").value;
+            var t = document.getElementById("t").value;
+            var i = document.getElementById("juros").value;
+            i = i / 100;
+            var mt = c * Math.pow((1 + i), t);
+            var j = mt - c;
+            document.getElementById("resultadoRendimento").innerHTML += "Montante ao final dos " + t + " meses = R$" + mt.toFixed(2) + '<br>';
+            document.getElementById("resultadoRendimento").innerHTML += "Total de juros = R$" + j.toFixed(2);
+            for (x = 1; x <= t; x++) {
+                var mm = c * Math.pow((1 + i), x);
+                document.getElementById("resultadoValoresMes").innerHTML += "Mês " + x + "= R$" + mm.toFixed(2) + '<br>';
+            }
+        }
+    </script>
+</body>
+
+</html>
